@@ -18,8 +18,8 @@
     --search-padding: 0.6rem 1rem;
     --card-padding: 1rem;
 
-    --sticky-top-left:5.4rem;
-    --sticky-top-right:-18rem;
+    --sticky-top-left :7.4rem;
+    --sticky-top-right: -18rem;
 }
 
 
@@ -267,6 +267,10 @@ main .container .left .profile{
    display: block;
 }
 /*========================== MIDDLE =================================*/
+.middle{
+   margin-left: 20px;
+}
+/*========================== STORIES =================================*/
 .middle .stories {
    display: flex;
    justify-content: space-between;
@@ -359,8 +363,32 @@ main .container .left .profile{
    color: var(--color-dark);
    margin-right: 1rem;
 }
+/*========================== FEEDS =================================*/
+.middle .feeds .feed {
+   background-color: var(--color-white);
+   border-radius: var(--card-border-radius);
+   padding: var(--card-padding);
+   margin: 1rem 0;
+   font-size: 0.85rem;
+   line-height: 1.5;
+}
 
+.middle .feed .header{
+   display: flex;
+   justify-content: space-between;
+}
 
+.middle .feed .user {
+   display: flex;
+   gap: 1rem;
+
+}
+
+.middle .feed .photo {
+   border-radius: var(--card-border-radius);
+   overflow: hidden;
+   margin: 0.7rem 0 ;
+}
 
 
 
