@@ -1,10 +1,16 @@
+<?php 
+
+// Include database connection file
+include 'connectdb.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Socialy</title>
-    <link rel="stylesheet" href="/css/socialy.css">
+    <link rel="stylesheet" href="css/socialy.css">
 </head>
 <body>
     <section class="container">
@@ -16,6 +22,6 @@
             <input class="login-button" type="submit" value="Login">
         </form>
     </section>
-    <script src="/js/socialy.js"></script>
+    <script src="js/socialy.js"></script>
 </body>
 </html>
