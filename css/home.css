@@ -317,31 +317,31 @@ main .container .left .profile{
    z-index: 2;
 }
 .middle .stories .story:nth-child(1) {
-   background-image: url('/img/n1.jpg');
+   background-image: url('../img/n1.jpg');
    background-repeat: no-repeat;
    background-position: center center;
    background-size: cover;
 }
 .middle .stories .story:nth-child(2) {
-   background-image: url('/img/n2.jpg');
+   background-image: url('../img/n2.jpg');
    background-repeat: no-repeat;
    background-position: center center;
    background-size: cover;
 }
 .middle .stories .story:nth-child(3) {
-   background-image: url('/img/n3.jpg');
+   background-image: url('../img/n3.jpg');
    background-repeat: no-repeat;
    background-position: center center;
    background-size: cover;
 }
 .middle .stories .story:nth-child(4) {
-   background-image: url('/img/n7.jpg');
+   background-image: url('../img/n7.jpg');
    background-repeat: no-repeat;
    background-position: center center;
    background-size: cover;
 }
 .middle .stories .story:nth-child(5) {
-   background-image: url('/img/n5.jpg');
+   background-image: url('../img/n5.jpg');
    background-repeat: no-repeat;
    background-position: center center;
    background-size: cover;
@@ -420,12 +420,87 @@ main .container .left .profile{
    border-radius: 50%;
    overflow: hidden;
    border: 2px solid var(--color-white);
+   margin-left: -0.6rem ;
 }
+
+.interaction-button .uil-heart.liked {
+   color: var(--color-danger); /* Change to red or any desired color */
+}
+
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hide the modal by default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); /* Semi-transparent black background */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 5px;
+}
+
+/* Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Form Styling */
+#postForm {
+    display: flex;
+    flex-direction: column;
+}
+
+#postContent {
+    margin-bottom: 10px;
+    height: 100px; /* Adjust height as needed */
+    resize: vertical;
+}
+
+#postImage {
+    margin-bottom: 10px;
+}
+
+/* Submit Button */
+button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
 /*========================== FEEDS END =================================*/
 
 /*========================== FRIEND REQUEST =================================*/
-
-main .container .right {
+ .right {
    height: max-content;
    position: sticky;
    top: var(--sticky-top-right);
@@ -456,6 +531,7 @@ main .container .right {
    margin-bottom: 1rem;
 }
 
+/*============================= its for setting menu=========================================*/
 
 
 
@@ -488,3 +564,23 @@ main .container .right {
       display: none;
    }
   }
+
+    /*===================================== Media Queries for mobile-phone =============================================*/
+    @media screen and (max-width: 992px) {
+      
+      nav .search-bar {
+         display:none;
+      }
+
+      main .container {
+         grid-template-columns: 0 auto 5rem;
+      }
+
+      main .container .left {
+         grid-column: 3/4;
+         position: fixed;
+         bottom: 0;
+         right: 0;
+      }
+      
+    }

@@ -14,18 +14,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
-    $password = $_POST['password'];
+    $password = $_POST['password_hash'];
 
     // Check if username, email, or phone number already exist in the database
     $query = "SELECT * FROM users WHERE username = '$name' OR email = '$email' OR mobile_num = '$phone'";
     $result = mysqli_query($conn, $query);
-    FV 
+
     if (mysqli_num_rows($result) > 0) {
         // User already exists
         $_SESSION['error'] = "User already registered with this username, email, or phone number.";
     } else {
         // Insert user data into the database
-        $query = "INSERT INTO users (username, email, mobile_num, password_user, registration_date) VALUES ('$name', '$email', '$phone', '$password', NOW())";
+        $query = "INSERT INTO users (username, email, mobile_num, password_hash, registration_date) VALUES ('$name', '$email', '$phone', '$password', NOW())";
         if (mysqli_query($conn, $query)) {
             // Registration successful
             header("Location: login.php");
@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input required="" class="input" type="text" name="name" id="name" placeholder="User Name">
             <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail">
             <input required="" class="input" type="tel" name="phone" id="phone" placeholder="Mobile Number">
-            <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
+            <input required="" class="input" type="password" name="password_hash" id="password" placeholder="Password">
             <span class="forgot-password"><a href="forgotpass.html">Forgot Password ?</a></span>
             <input class="login-button" type="submit" value="Register">
             <?php

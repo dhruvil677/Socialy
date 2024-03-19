@@ -1,10 +1,30 @@
+<?php
+include('connectdb.php');
+
+// Step 2: Executing a query
+$sql = "SELECT username, profile_picture_url FROM users where user_id=5";
+$query=mysqli_query($conn,$sql);
+if($query){
+
+    $row=mysqli_fetch_array($query);
+
+}
+
+?>
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Socialy</title>
-    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 </head>
 <body>
@@ -18,27 +38,53 @@
                 <input type="search" placeholder="search name, creator...">
             </div>
             <div class="create">
-                <label class="btn btn-primary"for="create-post">Create</label>
+            <a href="#" class="btn btn-primary" id="create-post">Create</a>
+
                 <div class="profile-picture">
-                    <img src="/img/user.jpg" alt="profile-picture">
+                    <img src="img/user.jpg" alt="profile-picture">
                 </div>
             </div>
         </div>
     </nav>
+
+  
 <!--========================================= MAIN ========================================================-->
 <main>
     <div class="container">
 <!--========================================= LEFT ========================================================-->
         <div class="left">
-            <a  class="profile">
+
+        
+
+        <a class="profile">
+            <div class="profile-picture">
+            <?php 
+                    $image_url = $row['profile_picture_url'];
+                    // Check if image exists or if profile_picture_url is empty
+                    if (!empty($image_url)) { ?>
+
+                       <img src="img/<?php echo $image_url;?>" alt="user-photo">
+
+                    <?php } else {  ?>
+
+                       <img src="img/dummy_img.jpeg" alt="Default User Photo">
+
+                  <?php  } ?>
+            </div>
+            <div class="handle">
+                <p class="text-muted">@<?php echo $row['username']; ?></p>
+            </div>
+        </a>
+
+            <!-- <a  class="profile">
                 <div class="profile-picture"? >
-                    <img src="/img/user.jpg" alt="user-photo">
+                    <img src="img/user.jpg" alt="user-photo">
                 </div>
                 <div class="handle">
                     <h4>Dhruvil Nayak</h4>
                     <p class="text-muted">@dhruvil_123</p>
                 </div>
-            </a>
+            </a> -->
 <!----------------------------------------- SIDEBAR ------------------------------------->
             <div class="sidebar">
                 <a  class="menu-item active" >
@@ -50,7 +96,7 @@
                 <div class="notification-popup">
                     <div>
                         <div class="profile-picture">
-                            <img src="/img/p1.jpg">
+                            <img src="img/p1.jpg">
                         </div>
                         <div class="notification-body">
                             <b>Preet Patel</b> accept your friend reuest.
@@ -59,7 +105,7 @@
                     </div>
                     <div>
                         <div class="profile-picture">
-                            <img src="/img/p2.jpg">
+                            <img src="img/p2.jpg">
                         </div>
                         <div class="notification-body">
                             <b>Dhruvil Patel</b> accept your friend reuest.
@@ -68,7 +114,7 @@
                     </div>
                     <div>
                         <div class="profile-picture">
-                            <img src="/img/p3.jpg">
+                            <img src="img/p3.jpg">
                         </div>
                         <div class="notification-body">
                             <b>Tirth Patel</b> accept your friend reuest.
@@ -77,7 +123,7 @@
                     </div>
                     <div>
                         <div class="profile-picture">
-                            <img src="/img/p4.jpg">
+                            <img src="img/p4.jpg">
                         </div>
                         <div class="notification-body">
                             <b>Adarsh Patel</b> accept your friend reuest.
@@ -86,7 +132,7 @@
                     </div>
                     <div>
                         <div class="profile-picture">
-                            <img src="/img/p5.jpg">
+                            <img src="img/p5.jpg">
                         </div>
                         <div class="notification-body">
                             <b>Hiten Prajapati</b> accept your friend reuest.
@@ -104,7 +150,8 @@
                 </a>
             </div>
             <!----------------------------------------- END OF SIDEBAR  ------------------------------------->
-            <label for="create-post" class="btn btn-primary">Create Post</label>
+            <a href="create_post.php" id="create-post" class="btn btn-primary">Create Post</a>
+
         </div>
 <!--========================================= MIDDLE ========================================================-->
         <div class="middle">
@@ -112,31 +159,31 @@
             <div class="stories">
                 <div class="story">
                     <div class="profile-picture">
-                        <img src="/img/p6.jpg" >
+                        <img src="img/p6.jpg" >
                     </div>
                     <p class="name">Your Story</p>
                 </div>
                 <div class="story">
                     <div class="profile-picture">
-                        <img src="/img/p4.jpg" >
+                        <img src="img/p4.jpg" >
                     </div>
                     <p class="name">Tirth Patel</p>
                 </div>
                 <div class="story">
                     <div class="profile-picture">
-                        <img src="/img/p5.jpg" >
+                        <img src="img/p5.jpg" >
                     </div>
                     <p class="name">Preet Patel</p>
                 </div>
                 <div class="story">
                     <div class="profile-picture">
-                        <img src="/img/p6.jpg" >
+                        <img src="img/p6.jpg" >
                     </div>
                     <p class="name">Dhruvil Patel</p>
                 </div>
                 <div class="story">
                     <div class="profile-picture">
-                        <img src="/img/p3.jpg" >
+                        <img src="img/p3.jpg" >
                     </div>
                     <p class="name">Hiten Prajapati</p>
                 </div>
@@ -144,22 +191,43 @@
   <!----------------------------------------- END OF STORIES  ------------------------------------->
             <form  class="create-post">
                 <div class="profile-picture">
-                    <img src="/img/user.jpg">
+                    <img src="img/user.jpg">
                 </div>
                 <input type="text" placeholder="Write your thought here, Dhruvil" id="create-post">
-                <input type="submit" value="Post" class="btn btn-primary">
+                <input type="submit" value="ADD" class="btn btn-primary">
             </form>
      <!----------------------------------------- FEEDS  ------------------------------------->
+     
             <div class="feeds">
+
+            <?php 
+            
+            $query=mysqli_query($conn,"select * from posts");
+
+            while($data=mysqli_fetch_array($query)){ 
+            ?>
                 <div class="feed">
                     <div class="head">
                         <div class="user">
                             <div class="profile-picture">
-                                <img src="/img/user.jpg" >
+                                <?php 
+                                $userQuery=mysqli_query($conn,"select * from users where user_id='".$data['user_id']."'");
+                                $userData=mysqli_fetch_array($userQuery);
+                                
+                                $image_url_2 = $userData['profile_picture_url'];
+                                 if (!empty($image_url_2)) { ?>
+
+                                <img src="img/<?php echo $image_url;?>">
+
+                                <?php } else {  ?>
+
+                                <img src="img/user.jpg" alt="Default User Photo">
+
+                                <?php  } ?>
                             </div>
                             <div class="info">
-                                <h3>Dhruvil Nayak</h3>
-                                <small>city, Mehsana</small>
+                                <h3><?php echo $userData['username']; ?></h3>
+                                <small><?php echo $data['location'];?></small>
                             </div>
                         </div>
                         <span class="edit">
@@ -167,12 +235,15 @@
                         </span>
                     </div> 
                     <div class="photo">
-                        <img src="/img/n1.jpg">
+                        <img src="img/<?php echo $data['image_path'];?>">
                     </div>
 
                     <div class="action-button">
                         <div class="interaction-button">
-                            <span><i class="uil uil-heart"></i></span>
+                            <span class="intera ction-button">
+                                <span class="uil uil-heart"></span>
+                                <small class="like-count">0</small> <!-- Initial like count -->
+                            </span>
                             <span><i class="uil uil-comment"></i></span>
                             <span><i class="uil uil-share"></i></span>
                         </div>
@@ -181,21 +252,23 @@
                         </div>
                     </div>
                     <div class="liked-by">
-                        <span><img src="/img/n2.jpg"></span>
-                        <span><img src="/img/p6.jpg"></span>
-                        <span><img src="/img/p1.jpg"></span>
+                        <span><img src="img/n2.jpg"></span>
+                        <span><img src="img/p6.jpg"></span>
+                        <span><img src="img/p1.jpg"></span>
                         <p>liked by <b>Hiten Prajapati</b>and <b>5 others</b></p>
                     </div>
                     <div class="caption">
-                        <p><b>Dhruvil Nayak</b>  Nature is everything</p>
+                        <p><b><?php echo $userData['username']; ?></b>  <?php echo $data['content']; ?></p>
                     </div>
                     <div class="comments text-muted"> view all 7 comments</div>
                 </div>
-                <div class="feed">
+
+            <?php } ?>
+                <!--<div class="feed">
                     <div class="head">
                         <div class="user">
                             <div class="profile-picture">
-                                <img src="/img/user.jpg">
+                                <img src="img/user.jpg">
                             </div>
                             <div class="info">
                                 <h3>Tirth Patel</h3>
@@ -207,7 +280,7 @@
                         </span>
                     </div>
                     <div class="photo">
-                        <img src="/img/n7.jpg">
+                        <img src="img/n7.jpg">
                     </div>
 
                     <div class="action-button">
@@ -221,136 +294,16 @@
                         </div>
                     </div>
                     <div class="liked-by">
-                        <span><img src="/img/n2.jpg"></span>
-                        <span><img src="/img/p6.jpg"></span>
-                        <span><img src="/img/p1.jpg"></span>
+                        <span><img src="img/n2.jpg"></span>
+                        <span><img src="img/p6.jpg"></span>
+                        <span><img src="img/p1.jpg"></span>
                         <p>liked by <b>Hiten Prajapati</b>and <b>5 others</b></p>
                     </div>
                     <div class="caption">
                         <p><b>Dhruvil Nayak</b>  Nature is so cool </p>
                     </div>
                     <div class="comments text-muted"> view all 7 comments</div>
-                </div>
-                <div class="feed">
-                    <div class="head">
-                        <div class="user">
-                            <div class="profile-picture">
-                                <img src="/img/user.jpg">
-                            </div>
-                            <div class="info">
-                                <h3>Dhruvil Patel</h3>
-                                <small>Modhera, Mehsana</small>
-                            </div>
-                        </div>
-                        <span class="edit">
-                            <i class="uil uil-ellipsis-h"></i>
-                        </span>
-                    </div>
-                    <div class="photo">
-                        <img src="/img/n5.jpg">
-                    </div>
-
-                    <div class="action-button">
-                        <div class="interaction-button">
-                            <span><i class="uil uil-heart"></i></span>
-                            <span><i class="uil uil-comment"></i></span>
-                            <span><i class="uil uil-share"></i></span>
-                        </div>
-                        <div class="save">
-                            <span><i class="uil uil-bookmark"></i></span>
-                        </div>
-                    </div>
-                    <div class="liked-by">
-                        <span><img src="/img/n2.jpg"></span>
-                        <span><img src="/img/p6.jpg"></span>
-                        <span><img src="/img/p1.jpg"></span>
-                        <p>liked by <b>Hiten Prajapati</b>and <b>5 others</b></p>
-                    </div>
-                    <div class="caption">
-                        <p><b>Dhruvil Patel</b>  Nature teaches everything</p>
-                    </div>
-                    <div class="comments text-muted"> view all 7 comments</div>
-                </div>
-                <div class="feed">
-                    <div class="head">
-                        <div class="user">
-                            <div class="profile-picture">
-                                <img src="/img/user.jpg">
-                            </div>
-                            <div class="info">
-                                <h3>Adarsh Patel</h3>
-                                <small>Nature, Idar</small>
-                            </div>
-                        </div>
-                        <span class="edit">
-                            <i class="uil uil-ellipsis-h"></i>
-                        </span>
-                    </div>
-                    <div class="photo">
-                        <img src="/img/n3.jpg">
-                    </div>
-
-                    <div class="action-button">
-                        <div class="interaction-button">
-                            <span><i class="uil uil-heart"></i></span>
-                            <span><i class="uil uil-comment"></i></span>
-                            <span><i class="uil uil-share"></i></span>
-                        </div>
-                        <div class="save">
-                            <span><i class="uil uil-bookmark"></i></span>
-                        </div>
-                    </div>
-                    <div class="liked-by">
-                        <span><img src="/img/n2.jpg"></span>
-                        <span><img src="/img/p6.jpg"></span>
-                        <span><img src="/img/p1.jpg"></span>
-                        <p>liked by <b>Hiten Prajapati</b>and <b>5 others</b></p>
-                    </div>
-                    <div class="caption">
-                        <p><b>Adarsh Patel</b>  Nature teaches everything</p>
-                    </div>
-                    <div class="comments text-muted"> view all 7 comments</div>
-                </div>
-                <div class="feed">
-                    <div class="head">
-                        <div class="user">
-                            <div class="profile-picture">
-                                <img src="/img/user.jpg">
-                            </div>
-                            <div class="info">
-                                <h3>Savan Patel</h3>
-                                <small>Radhanpur, Mehsana</small>
-                            </div>
-                        </div>
-                        <span class="edit">
-                            <i class="uil uil-ellipsis-h"></i>
-                        </span>
-                    </div>
-                    <div class="photo">
-                        <img src="/img/n2.jpg">
-                    </div>
-
-                    <div class="action-button">
-                        <div class="interaction-button">
-                            <span><i class="uil uil-heart"></i></span>  
-                            <span><i class="uil uil-comment"></i></span>
-                            <span><i class="uil uil-share"></i></span>
-                        </div>
-                        <div class="save">
-                            <span><i class="uil uil-bookmark"></i></span>
-                        </div>
-                    </div>
-                    <div class="liked-by">
-                        <span><img src="/img/n2.jpg"></span>
-                        <span><img src="/img/p6.jpg"></span>
-                        <span><img src="/img/p1.jpg"></span>
-                        <p>liked by <b>Hiten Prajapati</b>and <b>5 others</b></p>
-                    </div>
-                    <div class="caption">
-                        <p><b>Dhruvil Nayak</b>  Nature teaches everything</p>
-                    </div>
-                    <div class="comments text-muted"> view all 7 comments</div>
-                </div>
+                </div>-->
             </div>
         </div>
 <!--========================================= RIGHT ========================================================-->
@@ -360,7 +313,7 @@
                 <div class="request">
                     <div class="info">
                         <div class="profile-picture">
-                           <img src="/img/p4.jpg">
+                           <img src="img/p4.jpg">
                          </div>
                         <div>
                             <h4>Tirth Patel</h>
@@ -381,6 +334,9 @@
     </div>
 </main>
 
+
+
 <script src="js/home.js"></script>
+<script src="js/socialy.js"></script>
 </body>
 </html>
